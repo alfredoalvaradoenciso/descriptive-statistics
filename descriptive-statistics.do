@@ -1,7 +1,32 @@
 gl bases "C:\Users\Dell\Desktop\Ideas\sunafil\BASES"
 
-use "$bases\BASE_ENAHO_SIAF_SUNAFIL.dta", clear 
+*** (Basic) Descriptive statistics using esttab
+sysuse auto, clear
+eststo clear
+eststo ttests: estpost ttest price mpg trunk, by(foreign)
+eststo summstats: estpost summarize price mpg trunk
+eststo treated: estpost summarize price mpg trunk if foreign==1
+eststo non_treated: estpost summarize price mpg trunk if foreign==0
+esttab summstats             ///
+       treated               ///
+       non_treated           ///
+       ttests,               ///
+       cell(p(fmt(%6.3f)) &  ///
+       mean(fmt(%6.2f))      ///
+       sd(fmt(%6.3f) par))   ///
+       label replace         ///
+       mtitle("Total"        ///
+              "Foreign"      ///
+              "Domestic"     ///
+              "p-value")     ///
+       title(Descriptive     ///
+             Table)          ///
+       collabels(none)
 
+	   
+*** (Advanced) Descriptive statistics using matrices
+	   
+use "$bases\BASE_ENAHO_SIAF_SUNAFIL.dta", clear 
 **variable tratamiento: policy
 
 ds horasinf asal_sinseg sincont salmin 

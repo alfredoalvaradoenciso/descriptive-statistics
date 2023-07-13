@@ -57,7 +57,6 @@ reshape wide bp, i(`v') j(c)
 svmat t, names(t)
 
 
-
 *** Median test
 sysuse bplong, clear
 keep patient when bp
