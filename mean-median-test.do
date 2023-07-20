@@ -69,16 +69,9 @@ epctile diff, p(50)
 centile diff, centile(50)
 gen signdiff=sign(bp1-bp2)
 gen absdiff=abs(bp1-bp2)
-somersd signdiff absdiff if absdiff!=0, transf(z) 
 
-
-signrank ingprinmes_2008=ingprinmes_2009
-bootstrap r(p50), reps(50): sum brecha0809mes, d
-epctile brecha0809mes  if mov2_2008==0 & mov2_2009==2 , p(50)
-centile brecha0809mes  , centile(50)
-gen signdiff=sign(ingprinmes_2008-ingprinmes_2009) if mov2_2008==0 & mov2_2009==2
-gen absdiff=abs(ingprinmes_2008-ingprinmes_2009) if mov2_2008==0 & mov2_2009==2
-somersd signdiff absdiff if absdiff!=0 & mov2_2008==0 & mov2_2009==2, transf(z) 
-
-
-epctile brecha0809mes  if mov2_2008==0 & mov2_2009==2 [iw= FAC5_2008 ], p(50)
+** Robust confidence intervals for median and other percentile differences
+*findit snp15_7
+*force installation
+sysuse bplong, clear
+cendif bp, by(when)
