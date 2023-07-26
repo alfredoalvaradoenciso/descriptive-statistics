@@ -15,7 +15,7 @@ esttab summstats treated non_treated ttests using "table.csv", ///
        title("Table. Descriptive statistics") collabels(none)
 
 	   
-*** Descriptive statistics using matrices (Advanced) 
+*** Descriptive statistics using matrices
 sysuse auto, clear
 local vars "price mpg trunk headroom length turn displacement"
 local num_vars: word count `vars'
@@ -90,7 +90,8 @@ keep Variables B1 SE2 B2 SE4 B3star SE6
 
 export excel "table.xlsx", replace firstrow(varl)
 
+*Output in tex
 /*
-texsave Variables B1 SE2 B2 SE4 B3star SE6 using "$bases/table.tex", ///
+texsave Variables B1 SE2 B2 SE4 B3star SE6 using "table.tex", ///
  varlabels title("Descriptive statistics") nofix frag replace loc(htbp)  ///
- footnote("Notes: Mean of variables. Standard errors in parentheses. Significance for mean tests between treated and not treated: * significant at 10%, ** significant at 5%, and *** significant at 1%.") 
+ footnote("Source: Stata. Notes: Mean of variables. Standard errors in parentheses. Significance for mean tests between treated and not treated: * significant at 10%, ** significant at 5%, and *** significant at 1%.") 
