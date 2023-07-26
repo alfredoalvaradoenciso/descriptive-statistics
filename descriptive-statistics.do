@@ -8,10 +8,10 @@ eststo ttests: estpost ttest price mpg trunk, by(foreign)
 eststo summstats: estpost summarize price mpg trunk
 eststo treated: estpost summarize price mpg trunk if foreign==1
 eststo non_treated: estpost summarize price mpg trunk if foreign==0
-esttab summstats treated non_treated ttests, ///
+esttab summstats treated non_treated ttests using "table.csv", ///
        cell(p(fmt(%6.3f)) &  mean(fmt(%6.2f)) sd(fmt(%6.3f) par)) label replace  ///
        mtitle("Total" "Foreign"  "Domestic" "p-value")     ///
-       title(Descriptive Table) collabels(none)
+       title("Table. Descriptive statistics") collabels(none)
 
 	   
 *** Descriptive statistics using matrices (Advanced) 
@@ -78,12 +78,12 @@ replace B3star=string(A10[1],"%9.0fc") if Variables=="Observations"
 label var Variables "Variables"
 label var B1 "All"
 label var B2 "Treated"
-label var B3 "No treated"
+label var B3star "No treated"
 format B1 B2 %9.1fc
 order Variables B1 SE2 B2 SE4 B3star SE6
 keep Variables B1 SE2 B2 SE4 B3star SE6
 
-export excel "C:\Users\Dell\Downloads\tabla1.xlsx", replace firstrow(varl)
+export excel "table.xlsx", replace firstrow(varl)
 
 /*
 texsave Variables B1 SE2 B2 SE4 B3star SE6 using "$bases/tabla1.tex", ///
