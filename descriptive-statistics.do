@@ -3,11 +3,12 @@
 
 
 sysuse auto, clear
+global vars "price mpg trunk headroom length turn displacement"
 eststo clear
-eststo ttests: estpost ttest price mpg trunk, by(foreign)
-eststo summstats: estpost summarize price mpg trunk
-eststo treated: estpost summarize price mpg trunk if foreign==1
-eststo non_treated: estpost summarize price mpg trunk if foreign==0
+eststo ttests: estpost ttest $vars, by(foreign)
+eststo summstats: estpost summarize $vars
+eststo treated: estpost summarize $vars if foreign==1
+eststo non_treated: estpost summarize $vars if foreign==0
 esttab summstats treated non_treated ttests using "table.csv", ///
        cell(p(fmt(%6.3f)) &  mean(fmt(%6.2f)) sd(fmt(%6.3f) par)) label replace  ///
        mtitle("Total" "Foreign"  "Domestic" "p-value")     ///
@@ -16,7 +17,7 @@ esttab summstats treated non_treated ttests using "table.csv", ///
 	   
 *** Descriptive statistics using matrices (Advanced) 
 sysuse auto, clear
-local vars "price mpg trunk"
+local vars "price mpg trunk headroom length turn displacement"
 local num_vars: word count `vars'
 
 local j = 1
@@ -63,18 +64,22 @@ replace SE`s'="("+string(A`s'*100,"%3.1f")+")" if strmatch(Variables,"*%*")==1
 
 rename (A1 A3 A5) (B1 B2 B3)
 
-local num_vars = `num_vars'+1
+local num_vars = `num_vars'+2
 set obs `num_vars'
 gen id=_n
-replace Variables="Observaciones" if id==`num_vars'
-replace B1=A8[1] if Variables=="Observaciones" 
-replace B2=A9[1] if Variables=="Observaciones" 
-replace B3=A10[1] if Variables=="Observaciones" 
+replace Variables="Control variables" if id==`num_vars'-1
+replace Variables="Observations" if id==`num_vars'
+replace id=4.5 if id==`num_vars'-1
+sort id
+replace B1=A8[1] if Variables=="Observations" 
+replace B2=A9[1] if Variables=="Observations" 
+replace B3=A10[1] if Variables=="Observations" 
 gen B3star=string(B3,"%3.1f") 
 replace B3star=string(B3,"%3.1f")+"*" if A7<=.1
 replace B3star=string(B3,"%3.1f")+"**" if A7<=.05
 replace B3star=string(B3,"%3.1f")+"***" if A7<=.01
 replace B3star=string(A10[1],"%9.0fc") if Variables=="Observations" 
+replace B3star="" if B3star=="."
 label var Variables "Variables"
 label var B1 "All"
 label var B2 "Treated"
