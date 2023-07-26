@@ -91,6 +91,6 @@ keep Variables B1 SE2 B2 SE4 B3star SE6
 export excel "table.xlsx", replace firstrow(varl)
 
 /*
-texsave Variables B1 SE2 B2 SE4 B3star SE6 using "$bases/tabla1.tex", ///
+texsave Variables B1 SE2 B2 SE4 B3star SE6 using "$bases/table.tex", ///
  varlabels title("Descriptive statistics") nofix frag replace loc(htbp)  ///
- footnote("Source: \cite{eea}. Notes: Amounts in millions of Nuevos Soles (S/) except in firm age and those with \%. Controlled transactions (CT) refer to the absolute value of related-party payable plus the absolute value of related-party receivable at the end of 2017. UIT are tax units with the following equivalence in 2017: 1 UIT = S/ 4050. Panels (A), (B) and (C) show three ways to identify treated firms according to controlled transactions. Firms affected are those firms with total revenue greater than 2300 UIT. Standard errors in parentheses.") 
+ footnote("Notes: Mean of variables. Standard errors in parentheses. Significance for mean tests between treated and not treated: * significant at 10%, ** significant at 5%, and *** significant at 1%.") 
