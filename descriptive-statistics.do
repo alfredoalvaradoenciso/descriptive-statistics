@@ -74,16 +74,16 @@ gen B3star=string(B3,"%3.1f")
 replace B3star=string(B3,"%3.1f")+"*" if A7<=.1
 replace B3star=string(B3,"%3.1f")+"**" if A7<=.05
 replace B3star=string(B3,"%3.1f")+"***" if A7<=.01
-replace B3star=string(A10[1],"%9.0fc") if Variables=="Observaciones" 
+replace B3star=string(A10[1],"%9.0fc") if Variables=="Observations" 
 label var Variables "Variables"
-label var B1 "Todos"
-label var B2 "Tratados"
-label var B3 "No Tratados"
+label var B1 "All"
+label var B2 "Treated"
+label var B3 "No treated"
 format B1 B2 %9.1fc
 order Variables B1 SE2 B2 SE4 B3star SE6
 keep Variables B1 SE2 B2 SE4 B3star SE6
 
-*export excel "$bases\tabla1.xlsx", replace firstrow(var)
+export excel "C:\Users\Dell\Downloads\tabla1.xlsx", replace firstrow(varl)
 
 /*
 texsave Variables B1 SE2 B2 SE4 B3star SE6 using "$bases/tabla1.tex", ///
