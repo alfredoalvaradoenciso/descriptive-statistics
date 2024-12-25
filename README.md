@@ -17,7 +17,7 @@ This script generates descriptive statistics for a dataset, including summary me
 #### How to Use:
 - Ensure your dataset contains variables similar to the example variables (`price`, `mpg`, etc.).
 - Modify the `global vars` line to specify variables of interest.
-- Run the script in Stata to produce summary tables.
+- Run the script.
 
 ---
 
@@ -32,7 +32,7 @@ This script performs hypothesis testing for means and medians, including paired 
 #### How to Use:
 - Load your dataset and ensure variables (`bp`, `when`, `patient`) match the example structure.
 - Adjust categorical and grouping variables as needed.
-- Run the script for detailed output on mean and median comparisons.
+- Run the script
 
 ---
 
@@ -46,6 +46,7 @@ This script calculates t-statistics and z-statistics, extracts key results, and 
 
 #### How to Use:
 - Load your dataset and ensure variables (`mpg`, `fore`, `rep`) align with the example.
+- Run the script
 
 ---
 
